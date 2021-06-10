@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+    JavaScript进阶任务 Task 1
+     </title>
+     <style>
+   #btn3{
+       margin-left: 20px;
+   }
+   input{
+       background-color: white;
+   }
+   #btn1,#btn2,#btn3,#btn4{
+    border-radius: 5px;
+    border-color: whitesmoke;
+   }
+   .box{
+       width: 50px;
+       height: 40px;
+       background-color: red;
+       color: white;
+       margin-left: 10px;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       font-size: 16px;
+       font-style: 微软雅黑;
+       
+   }
+   #content{
+       display: flex;
+       flex-direction: row;
+       margin-top: 30px;
+   }
+
+     </style>
+</head>
+<body>
+    <div id="header">
+    <form>
+    <input type="text" id="text" placeholder="请输入">
+    <input type="submit" id="btn1" value="左侧入" class="bt">
+    <input type="button" id="btn2" value="右侧入" class="bt">
+    <input type="button" id="btn3"   value="左侧出" class="bt">
+    <input type="button" id="btn4"  value="右侧出" class="bt">
+
+</form>
+
+</div> 
+<div id="content">
+
+</div>
+    <script>
+    var  text=document.getElementById("text");
+    var btn1=document.getElementById("btn1");
+    var btn2=document.getElementById("btn2");
+    var btn3=document.getElementById("btn3");
+    var btn4=document.getElementById("btn4");
+    var bt=document.getElementsByClassName("bt");
+    var content=document.getElementById("content");
+   
+  
+   btn1.addEventListener("click",function (e){
+    if(isNaN(text.value)||text.value==""){
+        alert("输入有误请检查");
+     
+       }
+       else{
+      e.preventDefault();
+       
+       var div=document.createElement("div");
+       
+        div.className="box";
+        console.log(div.className)
+           
+        var parentElement = document.getElementById("content");
+		var childrenElement = parentElement.getElementsByTagName("div");
+        textContent=document.createTextNode=text.value;
+        div.append(textContent);
+        
+        parentElement.insertBefore(div,childrenElement[0]);
+        // parentElement.firstChild(div)
+        //    parentElement.insertBefore(div1,childrenElenment[0]);
+        text.value="";
+       }
+   });
+
+    btn2.addEventListener("click",function (e){
+        if(isNaN(text.value)||text.value==""){
+        alert("输入有误请检查");
+      
+       }
+       else{
+        e.preventDefault();
+        var div=document.createElement("div");
+       
+        div.className="box";
+      
+           
+        var parentElement = document.getElementById("content");
+		var childrenElement = parentElement.getElementsByTagName("div");
+        textContent=document.createTextNode=text.value;
+        div.append(textContent);
+        
+        parentElement.appendChild(div);
+        text.value="";
+       }
+
+
+    } );
+    
+    btn3.addEventListener("click",function(e){
+        if(content.childNodes.length==1)
+        {
+            alert("输入有误请检查");  
+           return false;
+        }
+        else{
+            console.log(content.childNodes);
+       e.preventDefault();
+       confirm("你是否要删除最左边的数");
+       var parentElement = document.getElementById("content");
+       var childrenElement = parentElement.getElementsByTagName("div");
+       parentElement.removeChild(childrenElement[0]);
+        }
+    });
+    btn4.addEventListener("click",function(e){
+        if(content.childNodes.length==1)
+        {
+            alert("输入有误请检查");  
+           return false;
+        }
+        else{
+   
+        e.preventDefault();
+       confirm("你是否要删除最右边的数");
+       var parentElement = document.getElementById("content");
+      
+       parentElement.removeChild(parentElement.lastElementChild);
+        }
+    });
+
+   
+
+
+   
+
+    </script>
+</body>
+</html>
