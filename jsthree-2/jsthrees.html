@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task 3</title>
+  <style>
+   #textarea{
+       width: 300px;
+       height: 120px;
+
+   }
+   .box{
+       width: 80px;
+       height: 40px;
+       background-color: red;
+       color: white;
+       
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       font-size: 16px;
+       font-style: 微软雅黑;
+      
+       margin-left: 15px;
+       
+   }
+   #content{
+       width: 100%;
+       height: 620px;
+       display: flex;
+       flex-direction: row;
+       margin-top: 30px;
+ 
+   }
+  </style>
+</head>
+<body>
+  <textarea id="textarea" placeholder="请输入字符并用不同符号分隔"></textarea>
+  <input type="submit" id="btn1" value="插入">
+  <input type="submit" id="btn2" value="查询">
+  <input type="text" id="text">
+
+  <div id="content"></div>
+    
+
+
+
+
+
+
+
+
+
+    <script>
+         var  text=document.getElementById("text");
+         var textarea=document.getElementById("textarea");
+         var content=document.getElementById("content");
+
+
+
+     btn1.addEventListener("click",function (e){
+        
+          
+        e.preventDefault();
+
+        var div=document.createElement("div");
+       
+        div.className="box";
+        div.innerText=textarea.value;
+           
+        var parentElement = document.getElementById("content");
+		var childrenElement = parentElement.getElementsByTagName("div");
+    
+        
+        parentElement.appendChild(div);
+        textarea.value="";
+      
+        
+           
+           
+       
+
+
+    } );
+
+
+    btn2.addEventListener("click",function(){
+    var textValue=document.getElementById("text").value;
+   var length=content.children.length;
+   console.log(length);
+  for(var i=0;i<length;i++){
+     var str=content.children[i].innerText;
+    //  console.log(str)
+     var n=str.search(textValue);
+     console.log(n)
+        if(n!=-1){
+            var divBox=content.children[i];
+            divBox.style.background="blue";
+        }
+       
+    var n=null;
+    }
+
+});
+
+
+
+    </script>
+</body>
+</html>
