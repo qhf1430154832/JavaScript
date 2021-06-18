@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>practice</title>
+</head>
+<style>
+    strong{
+        font-size: 20px;
+    }
+    body{
+        display: flex;
+        justify-content: center;
+        background-color: whitesmoke;
+    }
+ *{ 
+     padding: 0;
+     margin: 0;
+ }
+ 
+ textarea{
+     margin-top: 20px;
+     width: 650px;
+     height: 100px;
+    margin-top: px;
+ }
+ #submit{
+     width: 150px;
+     margin-left: 50px;
+     border-radius: 10px;
+ }
+ #text{
+     margin-top: 100px;
+    border-radius: 10px;
+    height: 50px;
+   
+ }
+#textBox{
+    margin-top: 20px;
+    width: 650px;
+    height: 100px;
+    background-color: white;
+    margin-left: 50px;
+    border: 1px solid #cccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#content{
+    margin-top: 20px;
+    width: 650px;
+    height: 100px;
+    background-color: white;
+    margin-left: 50px;
+    border: 1px solid #cccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.boxstyle{
+    width: 50px;
+    height: 50px;
+    background-color: red;
+    margin-left: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+</style>
+<body>
+    <label>
+    <strong>Tag:</strong>
+    <input type="text" id="text" onkeydown="textEvent(event)">
+    <div id="textBox">
+   
+    </div>
+    <strong>兴趣:</strong>
+    <textarea id="textarea" placeholder="通过一个Textarea进行兴趣爱好的输入，可以通过用回车，逗号（全角半角均可），顿号，空格（全角半角、Tab等均可）等符号作为间隔。
+    "></textarea>
+    <br>
+    
+    <input type="submit" value="确认兴趣爱好" id="submit">
+    <div id="content"></div>
+    
+</label>
+
+
+<script>
+ var text=document.getElementById("text");
+ var textBox=document.getElementById("textBox");
+ var textarea=document.getElementById("textarea");
+ var submit=document.getElementById("submit");
+ var content=document.getElementById("content");
+ var textarr=[];
+ function textEvent(event){
+ 
+  if((event.keyCode==188)||(event.keyCode==13)|| (event.keyCode == 32)){
+     var box=textBox.getElementsByTagName("div");
+       for(var i=0;i<=textarr.length;i++){
+       
+        
+        if(text.value==textarr[i])
+         
+        return false;
+       }
+    text.value.trim();
+    
+    var box=document.createElement("div");
+    box.innerHTML=text.value;
+    box.className="boxstyle";
+    box.setAttribute('onmouseover', 'show()'); 
+    box.setAttribute('onmouseout', 'hide()'); 
+  
+    textBox.append(box);
+    text.value="";
+    textarr.push(box.innerText);
+   
+   
+   
+ }
+ var box=textBox.getElementsByTagName("div");
+
+ for(var j=0;j<textBox.children.length;j++){
+  
+    box[j].addEventListener("click",function(){
+     this.remove();
+    
+    })
+ }
+
+
+ var textLength=textBox.childNodes.length;
+   if(textLength==11){
+    console.log(textLength);
+    console.log(textBox.childNodes)
+
+    
+      textBox.childNodes[0].remove();
+   }
+  
+
+ }
+ var valuearr=[];
+ submit.addEventListener("click",function(e){
+  e.preventDefault();
+  
+ var valuear=textarea.value.replace(/[^\d\u4e00-\u9fa5a-zA-Z]+/g, " ");
+ var  valuearr=valuear.toString().split(" ");
+    valuearr=unique(valuearr);
+    
+   valuearrLength=valuearr.length;
+   for(var i=0;i<valuearrLength;i++){
+       valuearr[i].trim();
+    var box=document.createElement("div");
+    box.innerHTML=valuearr[i];
+    box.className="boxstyle";
+    box.setAttribute('onmouseover', 'show()'); 
+    box.setAttribute('onmouseout', 'hide()'); 
+    // box.setAttribute('onclick', 'click()'); 
+    content.append(box);
+    textarea.value="";
+   
+    var box=content.getElementsByTagName("div");
+   
+    box[i].addEventListener("click",function(){
+       this.remove();
+
+    });
+   
+   }
+ 
+  
+ 
+
+
+ });
+ function show(e) {
+       var e = e || event;
+        e.target.style.with=100+"px";
+        e.target.style.backgroundColor = "#219AB5";
+        e.target.innerHTML = "点击删除" + e.target.innerHTML;
+    }
+
+    function hide(e) {
+        var e = e || event;
+      
+        e.target.style.backgroundColor ="#FF0000";
+        e.target.innerHTML = e.target.innerHTML.slice(4, e.target.innerHTML.length);
+    }
+   function click(){
+    
+    console.log(this.innerText)
+    // e.target.style.display="none";
+    this.style.display="none";
+   }
+
+
+ var textBoxLength=textBox.childNodes.length;
+
+
+
+function unique(arr) {
+			    var result = [], hash = {};
+			    for (var i = 0, elem; (elem = arr[i]) != null; i++) {
+			        if (!hash[elem]) {
+			            result.push(elem);
+			            hash[elem] = true;
+			        }
+			    }
+			    return result;
+			}
+
+</script>
+</body>
+</html>
